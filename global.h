@@ -1,3 +1,4 @@
+#pragma once
 #define HEIGHT 6
 #define WIDTH 7
 

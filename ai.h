@@ -1,4 +1,4 @@
-#ifndef AI_H
+#pragma once
 #define AI_H
 
 #include <algorithm>
@@ -27,5 +27,3 @@ public:
         int alpha,
         int beta);
 };
-
-#endif //AI_H

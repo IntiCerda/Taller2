@@ -1,4 +1,4 @@
-#ifndef BOARD_H
+#pragma once
 #define BOARD_H
 
 #include <iostream>
@@ -17,5 +17,3 @@ public:
     bool columnFull(int column);
     long scoreBoard();
 };
-
-#endif // BOARD_H

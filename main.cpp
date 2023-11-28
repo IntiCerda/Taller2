@@ -1,36 +1,38 @@
 #include "board.h"
 #include "ai.h"
+#include <iostream>
+using namespace std;
+
 
 int main()
 {
     Board board;
     AI ai;
-
-    std::cout << "--------------------\n\nConnect-Four MiniMax\n\n--------------------\n\n";
-
+    cout << "--------------------\n\nConnecta 4\n\n--------------------\n\n"<<endl;
     int maxDepth;
+
     while (1)
     {
-        char skill;
-        std::cout << "Difficulty Level [h]: hard | [m]: medium | [e]: easy | [n]: no limit: ";
-        std::cin >> skill;
+        string dificultad;
+        cout << "Dificultad  [d]: dificil | [m]: medio | [f]: facil | [i]: imposible: "<<endl;
+        cin >> dificultad;
 
-        if (skill == 'h')
+        if (dificultad == "d")
         {
             maxDepth = 9;
             break;
         }
-        else if (skill == 'm')
+        else if (dificultad == "m")
         {
             maxDepth = 5;
             break;
         }
-        else if (skill == 'e')
+        else if (dificultad == "f")
         {
             maxDepth = 3;
             break;
         }
-        else if (skill == 'n')
+        else if (dificultad == "i")
         {
             maxDepth = 41;
             break;
@@ -49,19 +51,18 @@ int main()
 
         if (board.scoreBoard() == HUMAN_WIN)
         {
-            std::cout << "You Win!" << std::endl;
+            cout << "Victoria! " << endl;
             break;
         }
 
-        std::cout << "Computer is comtemplating its move..."
-                  << std::endl;
+        cout << "IA: "<<endl;
         Move compMove = ai.minimax(board, true, maxDepth, COMP, ALPHA, BETA);
         board.dropDisk(compMove.move, COMP);
 
         if (board.scoreBoard() == COMP_WIN)
         {
             board.printBoard();
-            std::cout << "Computer Wins..." << std::endl;
+            cout << "IA Win..." << endl;
             break;
         }
     }
