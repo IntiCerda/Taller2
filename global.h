@@ -2,12 +2,10 @@
 #define HEIGHT 6
 #define WIDTH 7
 
-// BOARD PEICES
 #define HUMAN -1
 #define COMP 1
 #define EMPTY 0
 
-// COLORS FOR TERMINAL
 #define RESET "\033[0m"
 
 #define COMP_WIN 100000
