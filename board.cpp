@@ -47,9 +47,9 @@ void Board::printBoard()
 
 int Board::dropDisk(int column, int player)
 {
-    for (int y = 6 - 1; y >= 0; y--)
+    for (int y = HEIGHT - 1; y >= 0; y--)
     {
-        if (_board[y][column] == 0)
+        if (_board[y][column] == EMPTY)
         {
             _board[y][column] = player;
             return y;
@@ -60,14 +60,14 @@ int Board::dropDisk(int column, int player)
 
 void Board::removeDisk(int row, int column)
 {
-    _board[row][column] = 0;
+    _board[row][column] = EMPTY;
 }
 
 bool Board::boardFull()
 {
-    for (int x = 0; x < 7; x++)
+    for (int x = 0; x < WIDTH; x++)
     {
-        if (_board[0][x] == 0)
+        if (_board[0][x] == EMPTY)
         {
             return false;
         }
@@ -77,21 +77,21 @@ bool Board::boardFull()
 
 bool Board::columnFull(int column)
 {
-    return _board[0][column] != 0;
+    return _board[0][column] != EMPTY;
 }
 
 long Board::scoreBoard()
 {
     int counters[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    typedef int grid[6][7];
+    typedef int grid[HEIGHT][WIDTH];
     const grid &scores = _board;
 
     // Horizontal spans
-    for (int y = 0; y < 6; y++)
+    for (int y = 0; y < HEIGHT; y++)
     {
         int score = scores[y][0] + scores[y][1] + scores[y][2];
-        for (int x = 3; x < 7; x++)
+        for (int x = 3; x < WIDTH; x++)
         {
             score += scores[y][x];
             counters[score + 4]++;
@@ -99,10 +99,10 @@ long Board::scoreBoard()
         }
     }
     // Vertical spans
-    for (int x = 0; x < 7; x++)
+    for (int x = 0; x < WIDTH; x++)
     {
         int score = scores[0][x] + scores[1][x] + scores[2][x];
-        for (int y = 3; y < 6; y++)
+        for (int y = 3; y < HEIGHT; y++)
         {
             score += scores[y][x];
             counters[score + 4]++;
@@ -110,9 +110,9 @@ long Board::scoreBoard()
         }
     }
     // Down-right (and up-left) diagonals
-    for (int y = 0; y < 6 - 3; y++)
+    for (int y = 0; y < HEIGHT - 3; y++)
     {
-        for (int x = 0; x < 7 - 3; x++)
+        for (int x = 0; x < WIDTH - 3; x++)
         {
             int score = 0;
             for (int idx = 0; idx < 4; idx++)
@@ -125,9 +125,9 @@ long Board::scoreBoard()
         }
     }
     // up-right (and down-left) diagonals
-    for (int y = 3; y < 6; y++)
+    for (int y = 3; y < HEIGHT; y++)
     {
-        for (int x = 0; x < 7 - 3; x++)
+        for (int x = 0; x < WIDTH - 3; x++)
         {
             int score = 0;
             for (int idx = 0; idx < 4; idx++)
