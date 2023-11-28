@@ -1,48 +1,46 @@
-using namespace std;
-
 #include "board.h"
 
 Board::Board()
 {
-    for (int y = 0; y < 6; y++)
+    for (int y = 0; y < HEIGHT; y++)
     {
-        for (int x = 0; x < 7; x++)
+        for (int x = 0; x < WIDTH; x++)
         {
-            _board[y][x] = 0;
+            _board[y][x] = EMPTY;
         }
     }
 }
 
 void Board::printBoard()
 {
-    cout << "\n";
-    for (int y = 0; y < 6; y++)
+    std::cout << "\n";
+    for (int y = 0; y < HEIGHT; y++)
     {
-        for (int x = 0; x < 7; x++)
+        for (int x = 0; x < WIDTH; x++)
         {
-            cout << " ";
+            std::cout << " ";
 
             if (_board[y][x] == HUMAN)
             {
-                cout << "x" << RESET;
+                std::cout << RED << 'x' << RESET;
             }
             else if (_board[y][x] == COMP)
             {
-                cout << "o" << RESET;
+                std::cout << YELLOW << 'o' << RESET;
             }
             else
             {
-                cout << "-";
+                std::cout << '-';
             }
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 
     for (int x = 1; x <= WIDTH; x++)
     {
-        cout << " " << x<<endl;
+        std::cout << " " << x;
     }
-    cout << "\n\n" << endl;
+    std::cout << "\n\n";
 }
 
 int Board::dropDisk(int column, int player)
