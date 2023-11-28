@@ -1,39 +1,41 @@
 #include "board.h"
+using namespace std;
+
 
 Board::Board()
 {
-    for (int y = 0; y < HEIGHT; y++)
+    for (int y = 0; y < 6; y++)
     {
-        for (int x = 0; x < WIDTH; x++)
+        for (int x = 0; x < 7; x++)
         {
-            _board[y][x] = EMPTY;
+            _board[y][x] = 0;
         }
     }
 }
 
 void Board::printBoard()
 {
-    std::cout << "\n";
-    for (int y = 0; y < HEIGHT; y++)
+    cout << "\n";
+    for (int y = 0; y < 6; y++)
     {
-        for (int x = 0; x < WIDTH; x++)
+        for (int x = 0; x < 7; x++)
         {
-            std::cout << " ";
+            cout << " ";
 
             if (_board[y][x] == HUMAN)
             {
-                std::cout << RED << 'x' << RESET;
+                cout << "x" << RESET;
             }
             else if (_board[y][x] == COMP)
             {
-                std::cout << YELLOW << 'o' << RESET;
+                cout <<  "o" << RESET;
             }
             else
             {
-                std::cout << '-';
+                cout << "-";
             }
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 
     for (int x = 1; x <= WIDTH; x++)
@@ -141,7 +143,7 @@ long Board::scoreBoard()
         return HUMAN_WIN;
     else if (counters[8] != 0)
         return COMP_WIN;
-    else // heuristic function
+    else 
         return counters[5] + 2 * counters[6] + 5 * counters[7] -
                counters[3] - 4 * counters[2] - 10 * counters[1];
 }
