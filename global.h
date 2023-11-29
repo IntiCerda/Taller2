@@ -6,8 +6,6 @@
 #define COMP 1
 #define EMPTY 0
 
-#define RESET "\033[0m"
-
 #define COMP_WIN 100000
 #define HUMAN_WIN -100000
 

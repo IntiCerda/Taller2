@@ -1,26 +1,28 @@
 #include "ai.h"
 
-Move AI::minimax(Board &board, bool isMaximizing, int depth, int player, int alpha, int beta)
+AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, int alpha, int beta)
 {
     int initialScore = board.scoreBoard();
     if (board.boardFull())
     {
-        return Move(0);
+        return NewMove(0);
     }
     else if (initialScore == COMP_WIN)
     {
-        return Move(COMP_WIN);
+        return NewMove(COMP_WIN);
     }
     else if (initialScore == HUMAN_WIN)
     {
-        return Move(HUMAN_WIN);
+        return NewMove(HUMAN_WIN);
     }
     else if (depth == 0)
-        return initialScore;
+    {
+        return NewMove(initialScore);
+    }
 
     if (isMaximizing)
     {
-        Move bestMove(-100000000);
+        NewMove bestMove(-100000000);
         bestMove.move = -1;
 
         for (int x = 0; x < WIDTH; x++)
@@ -48,7 +50,7 @@ Move AI::minimax(Board &board, bool isMaximizing, int depth, int player, int alp
     }
     else
     {
-        Move bestMove(100000000);
+        NewMove bestMove(100000000);
         bestMove.move = -1;
 
         for (int x = 0; x < WIDTH; x++)

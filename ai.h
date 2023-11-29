@@ -5,25 +5,27 @@
 #include "board.h"
 #include "global.h"
 
-struct Move
-{
-    int move, score;
-    Move(int score)
-    {
-        this->score = score;
-    }
-};
-
 class AI
 {
     int maxDepth;
 
 public:
-    Move minimax(
+    struct NewMove
+    {
+        int move;
+        int score;
+        NewMove(int score)
+        {
+            this->score = score;
+        }
+    };
+
+    NewMove minimax(
         Board &board,
         bool isMaximizing,
         int depth,
         int player,
         int alpha,
-        int beta);
+        int beta
+    );
 };

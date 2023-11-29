@@ -24,11 +24,11 @@ void Board::printBoard()
 
             if (_board[y][x] == HUMAN)
             {
-                cout << "x" << RESET;
+                cout << "x";
             }
             else if (_board[y][x] == COMP)
             {
-                cout <<  "o" << RESET;
+                cout << "o";
             }
             else
             {

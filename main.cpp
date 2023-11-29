@@ -44,8 +44,8 @@ int main()
         board.printBoard();
 
         int move;
-        std::cout << "Enter Move: ";
-        std::cin >> move;
+        cout << "Enter Move: "<<endl;
+        cin >> move;
         board.dropDisk(move - 1, HUMAN);
         board.printBoard();
 
@@ -56,7 +56,7 @@ int main()
         }
 
         cout << "IA: "<<endl;
-        Move compMove = ai.minimax(board, true, maxDepth, COMP, ALPHA, BETA);
+        AI::NewMove compMove = ai.minimax(board, true, maxDepth, COMP, ALPHA, BETA);
         board.dropDisk(compMove.move, COMP);
 
         if (board.scoreBoard() == COMP_WIN)
