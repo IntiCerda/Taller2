@@ -34,9 +34,11 @@ int main()
         }
         else if (dificultad == "i")
         {
-            maxDepth = 41;
+            maxDepth = 40;
             break;
         }
+
+
     }
 
     while (1)
@@ -44,7 +46,7 @@ int main()
         board.printBoard();
 
         int move;
-        cout << "Enter Move: "<<endl;
+        cout << "Ingresar movimiento: "<<endl;
         cin >> move;
         board.dropDisk(move - 1, HUMAN);
         board.printBoard();
