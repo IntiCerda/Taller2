@@ -4,8 +4,7 @@
 using namespace std;
 
 
-int main()
-{
+int main(){
     Board board;
     AI ai;
     cout << "\nConnecta 4\n"<<endl;

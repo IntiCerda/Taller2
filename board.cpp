@@ -10,31 +10,6 @@ Board::Board(){
     }
 }
 
-void Board::printBoard(){
-    cout << "\n";
-    for (int y = 0; y < 6; y++){
-        for (int x = 0; x < 7; x++){
-            cout << " ";
-
-            if (_board[y][x] == HUMAN){
-                cout << "x";
-            }
-            else if (_board[y][x] == COMP){
-                cout << "o";
-            }
-            else{
-                cout << "-";
-            }
-        }
-        cout << endl;
-    }
-
-    for (int x = 1; x <= 7; x++){
-        cout << " " << x;
-    }
-    cout << "\n\n";
-}
-
 int Board::dropDisk(int column, int player){
     for (int y = ALTO - 1; y >= 0; y--){
         if (_board[y][column] == EMPTY){
@@ -113,12 +88,35 @@ bool Board::boardFull(){
     return true;
 }
 
-
 void Board::removeDisk(int fila, int column){
     _board[fila][column] = EMPTY;
 }
 
-
 bool Board::columnFull(int column){
     return _board[0][column] != EMPTY;
+}
+
+void Board::printBoard(){
+    cout << "\n";
+    for (int y = 0; y < 6; y++){
+        for (int x = 0; x < 7; x++){
+            cout << " ";
+
+            if (_board[y][x] == HUMAN){
+                cout << "x";
+            }
+            else if (_board[y][x] == COMP){
+                cout << "o";
+            }
+            else{
+                cout << "-";
+            }
+        }
+        cout << endl;
+    }
+
+    for (int x = 1; x <= 7; x++){
+        cout << " " << x;
+    }
+    cout << "\n\n";
 }

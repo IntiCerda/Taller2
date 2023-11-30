@@ -2,7 +2,7 @@
 #define BOARD_H
 
 #include <iostream>
-#include "global.h"
+#include "define.h"
 
 class Board
 {

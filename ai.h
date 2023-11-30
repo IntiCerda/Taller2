@@ -3,7 +3,7 @@
 
 #include <algorithm>
 #include "board.h"
-#include "global.h"
+#include "define.h"
 
 class AI{
     int maxDepth;
