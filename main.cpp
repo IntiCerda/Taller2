@@ -8,51 +8,40 @@ int main()
 {
     Board board;
     AI ai;
-    cout << "--------------------\n\nConnecta 4\n\n--------------------\n\n"<<endl;
-    int maxDepth;
-
-    while (1)
-    {
-        string dificultad;
-        cout << "Dificultad  [d]: dificil | [m]: medio | [f]: facil | [i]: imposible: "<<endl;
+    cout << "\nConnecta 4\n"<<endl;
+    int maxDepth; // profundidad 
+    string dificultad = "";
+    while (1) {
+        cout << "Dificultad:  [d]: dificil | [m]: medio | [f]: facil | [i]: imposible: | [s]: salir  " << endl;
         cin >> dificultad;
-
-        if (dificultad == "d")
-        {
+        if (dificultad == "d") {
             maxDepth = 9;
             break;
-        }
-        else if (dificultad == "m")
-        {
+        } else if (dificultad == "m") {
             maxDepth = 5;
             break;
-        }
-        else if (dificultad == "f")
-        {
+        } else if (dificultad == "f") {
             maxDepth = 3;
             break;
-        }
-        else if (dificultad == "i")
-        {
+        } else if (dificultad == "i") {
             maxDepth = 40;
             break;
+        } else if (dificultad == "s") {
+            cout << "Gracias por jugar... " << endl;
+            return 0;  // Salir del programa
         }
-
-
     }
 
-    while (1)
-    {
+    while (1){
         board.printBoard();
 
-        int move;
+        int movimiento;
         cout << "Ingresar movimiento: "<<endl;
-        cin >> move;
-        board.dropDisk(move - 1, HUMAN);
+        cin >> movimiento;
+        board.dropDisk(movimiento - 1, HUMAN);
         board.printBoard();
 
-        if (board.scoreBoard() == HUMAN_WIN)
-        {
+        if (board.scoreBoard() == HUMAN_WIN){
             cout << "Victoria! " << endl;
             break;
         }
@@ -61,8 +50,7 @@ int main()
         AI::NewMove compMove = ai.minimax(board, true, maxDepth, COMP, ALPHA, BETA);
         board.dropDisk(compMove.move, COMP);
 
-        if (board.scoreBoard() == COMP_WIN)
-        {
+        if (board.scoreBoard() == COMP_WIN){
             board.printBoard();
             cout << "IA Win..." << endl;
             break;
