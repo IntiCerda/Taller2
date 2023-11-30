@@ -1,6 +1,6 @@
 #pragma once
-#define HEIGHT 6
-#define WIDTH 7
+#define ALTO 6
+#define ANCHO 7
 
 #define HUMAN -1
 #define COMP 1

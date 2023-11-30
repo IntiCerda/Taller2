@@ -25,7 +25,7 @@ AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, 
         NewMove bestMove(-100000000);
         bestMove.move = -1;
 
-        for (int x = 0; x < WIDTH; x++)
+        for (int x = 0; x < ANCHO; x++)
         {
             int row = board.dropDisk(x, COMP);
             if (row == -1)
@@ -53,7 +53,7 @@ AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, 
         NewMove bestMove(100000000);
         bestMove.move = -1;
 
-        for (int x = 0; x < WIDTH; x++)
+        for (int x = 0; x < ANCHO; x++)
         {
             int row = board.dropDisk(x, HUMAN);
             if (row == -1)

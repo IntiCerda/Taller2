@@ -6,7 +6,7 @@
 
 class Board
 {
-    int _board[HEIGHT][WIDTH];
+    int _board[ALTO][ANCHO];
 
 public:
     Board();
