@@ -5,17 +5,14 @@
 #include "board.h"
 #include "global.h"
 
-class AI
-{
+class AI{
     int maxDepth;
 
 public:
-    struct NewMove
-    {
+    struct NewMove{
         int move;
         int score;
-        NewMove(int score)
-        {
+        NewMove(int score){
             this->score = score;
         }
     };

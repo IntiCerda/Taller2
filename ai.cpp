@@ -1,43 +1,34 @@
 #include "ai.h"
 
-AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, int alpha, int beta)
-{
+AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, int alpha, int beta){
     int initialScore = board.scoreBoard();
-    if (board.boardFull())
-    {
+    if (board.boardFull()){
         return NewMove(0);
     }
-    else if (initialScore == COMP_WIN)
-    {
+    else if (initialScore == COMP_WIN){
         return NewMove(COMP_WIN);
     }
-    else if (initialScore == HUMAN_WIN)
-    {
+    else if (initialScore == HUMAN_WIN){
         return NewMove(HUMAN_WIN);
     }
-    else if (depth == 0)
-    {
+    else if (depth == 0){
         return NewMove(initialScore);
     }
 
-    if (isMaximizing)
-    {
+    if (isMaximizing){
         NewMove bestMove(-100000000);
         bestMove.move = -1;
 
-        for (int x = 0; x < ANCHO; x++)
-        {
-            int row = board.dropDisk(x, COMP);
-            if (row == -1)
-            {
+        for (int x = 0; x < ANCHO; x++){
+            int fila = board.dropDisk(x, COMP);
+            if (fila == -1){
                 continue;
             }
             int score = minimax(board, !isMaximizing, depth - 1, HUMAN, alpha, beta).score;
 
-            board.removeDisk(row, x);
+            board.removeDisk(fila, x);
 
-            if (score > bestMove.score)
-            {
+            if (score > bestMove.score){
                 bestMove.move = x;
                 bestMove.score = score;
             }
@@ -48,23 +39,19 @@ AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, 
         }
         return bestMove;
     }
-    else
-    {
+    else{
         NewMove bestMove(100000000);
         bestMove.move = -1;
 
-        for (int x = 0; x < ANCHO; x++)
-        {
-            int row = board.dropDisk(x, HUMAN);
-            if (row == -1)
-            {
+        for (int x = 0; x < ANCHO; x++){
+            int fila = board.dropDisk(x, HUMAN);
+            if (fila == -1){
                 continue;
             }
             int score = minimax(board, !isMaximizing, depth - 1, COMP, alpha, beta).score;
-            board.removeDisk(row, x);
+            board.removeDisk(fila, x);
 
-            if (score < bestMove.score)
-            {
+            if (score < bestMove.score){
                 bestMove.move = x;
                 bestMove.score = score;
             }

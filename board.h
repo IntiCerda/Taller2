@@ -12,7 +12,7 @@ public:
     Board();
     void printBoard();
     int dropDisk(int column, int player);
-    void removeDisk(int row, int column);
+    void removeDisk(int fila, int column);
     bool boardFull();
     bool columnFull(int column);
     long scoreBoard();
