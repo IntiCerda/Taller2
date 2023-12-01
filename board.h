@@ -4,16 +4,15 @@
 #include <iostream>
 #include "define.h"
 
-class Board
-{
-    int _board[ALTO][ANCHO];
+class Board{
+    int tablero[ALTO][ANCHO];
 
 public:
     Board();
-    void printBoard();
-    int dropDisk(int column, int player);
-    void removeDisk(int fila, int column);
-    bool boardFull();
-    bool columnFull(int column);
-    long scoreBoard();
+    void imprimirTablero();
+    bool tableroFull();
+    bool columnaFull(int columna);
+    long puntajeTablero();
+    int dejarDisco(int columna, int player);
+    void eliminarDisco(int fila, int columna);
 };

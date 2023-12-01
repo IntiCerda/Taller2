@@ -1,64 +1,88 @@
 #include "ai.h"
+using namespace std;
 
-AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, int alpha, int beta){
-    int initialScore = board.scoreBoard();
-    if (board.boardFull()){
+AI::NewMove AI::minimax(Board &board, bool isMaximizing, int depth, int player, int alpha, int beta) {
+    // Obtiene el puntaje inicial del tablero
+    int puntajeInicial = board.puntajeTablero();
+
+    // Verifica si el tablero está lleno
+    if (board.tableroFull()) {
         return NewMove(0);
     }
-    else if (initialScore == COMP_WIN){
+    // Verifica si el jugador actual ha ganado
+    else if (puntajeInicial == COMP_WIN) {
         return NewMove(COMP_WIN);
     }
-    else if (initialScore == HUMAN_WIN){
+    // Verifica si el oponente ha ganado
+    else if (puntajeInicial == HUMAN_WIN) {
         return NewMove(HUMAN_WIN);
     }
-    else if (depth == 0){
-        return NewMove(initialScore);
+    // Verifica si se ha alcanzado la profundidad máxima de búsqueda
+    else if (depth == 0) {
+        return NewMove(puntajeInicial);
     }
 
-    if (isMaximizing){
+    // Si es el turno del jugador maximizador
+    if (isMaximizing) {
+        // Inicializa el mejor movimiento con un puntaje muy bajo
         NewMove bestMove(-100000000);
         bestMove.move = -1;
 
-        for (int x = 0; x < ANCHO; x++){
-            int fila = board.dropDisk(x, COMP);
-            if (fila == -1){
+        // Itera sobre todas las columnas del tablero
+        for (int x = 0; x < ANCHO; x++) {
+            // Deja caer un disco en la columna actual
+            int fila = board.dejarDisco(x, COMP);
+            // Si la columna está llena, continúa con la siguiente columna
+            if (fila == -1) {
                 continue;
             }
-            int score = minimax(board, !isMaximizing, depth - 1, HUMAN, alpha, beta).score;
+            // Calcula el puntaje para el movimiento actual utilizando la recursión
+            int puntaje = minimax(board, !isMaximizing, depth - 1, HUMAN, alpha, beta).score;
+            // Elimina el disco para deshacer el movimiento
+            board.eliminarDisco(fila, x);
 
-            board.removeDisk(fila, x);
-
-            if (score > bestMove.score){
+            // Actualiza el mejor movimiento y el valor de alpha
+            if (puntaje > bestMove.score) {
                 bestMove.move = x;
-                bestMove.score = score;
+                bestMove.score = puntaje;
             }
-
             alpha = std::max(bestMove.score, alpha);
-            if (beta <= alpha)
+            // Realiza la poda alfa-beta
+            if (beta <= alpha) {
                 break;
+            }
         }
         return bestMove;
     }
-    else{
+    // Si es el turno del jugador minimizador
+    else {
+        // Inicializa el mejor movimiento con un puntaje muy alto
         NewMove bestMove(100000000);
         bestMove.move = -1;
 
-        for (int x = 0; x < ANCHO; x++){
-            int fila = board.dropDisk(x, HUMAN);
-            if (fila == -1){
+        // Itera sobre todas las columnas del tablero
+        for (int x = 0; x < ANCHO; x++) {
+            // Deja caer un disco en la columna actual
+            int fila = board.dejarDisco(x, HUMAN);
+            // Si la columna está llena, continúa con la siguiente columna
+            if (fila == -1) {
                 continue;
             }
-            int score = minimax(board, !isMaximizing, depth - 1, COMP, alpha, beta).score;
-            board.removeDisk(fila, x);
+            // Calcula el puntaje para el movimiento actual utilizando la recursión
+            int puntaje = minimax(board, !isMaximizing, depth - 1, COMP, alpha, beta).score;
+            // Elimina el disco para deshacer el movimiento
+            board.eliminarDisco(fila, x);
 
-            if (score < bestMove.score){
+            // Actualiza el mejor movimiento y el valor de beta
+            if (puntaje < bestMove.score) {
                 bestMove.move = x;
-                bestMove.score = score;
+                bestMove.score = puntaje;
             }
-
             beta = std::min(bestMove.score, beta);
-            if (beta <= alpha)
+            // Realiza la poda alfa-beta
+            if (beta <= alpha) {
                 break;
+            }
         }
         return bestMove;
     }
