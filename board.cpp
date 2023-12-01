@@ -11,10 +11,10 @@ Board::Board(){
 }
 //simula el proceso de dejar caer un disco, verifica si la celda está vacía. Si encuentra una celda vacía, 
 //coloca el disco del jugador en esa celda y devuelve el número de fila en la que se dejó caer el disco. Si la columna está llena, la función devuelve -1 para indicar que no se puede dejar caer el disco en esa columna.
-int Board::dejarDisco(int column, int player){
+int Board::dejarDisco(int columna, int player){
     for (int y = ALTO - 1; y >= 0; y--){
-        if (tablero[y][column] == EMPTY){
-            tablero[y][column] = player;
+        if (tablero[y][columna] == EMPTY){
+            tablero[y][columna] = player;
             return y;
         }
     }
@@ -104,13 +104,13 @@ bool Board::tableroFull(){
 }
 
 // "fila" y "columna", que representan las coordenadas de una celda en el tablero. La función entonces asigna el valor de "EMPTY" (0) a la celda en la posición especificada
-void Board::eliminarDisco(int fila, int column){
-    tablero[fila][column] = EMPTY;
+void Board::eliminarDisco(int fila, int columna){
+    tablero[fila][columna] = EMPTY;
 }
 
 //verifica si una columna específica del tablero está llena y devuelve un valor booleano en función de esa verificación.
-bool Board::columnaFull(int column){
-    return tablero[0][column] != EMPTY;
+bool Board::columnaFull(int columna){
+    return tablero[0][columna] != EMPTY;
 }
 
 //imprime por pantalla el tablero, cuando se encuantra con "HUMAN" (= -1) se reemplaza con una X, y en caso de COMP con una o
