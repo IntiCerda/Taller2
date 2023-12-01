@@ -9,23 +9,23 @@ int main() {
         Board board;
         AI ai;
         cout << "\nConnecta 4\n" << endl;
-        int maxDepth; // profundidad 
+        int profMaxima; // profundidad 
         string dificultad;
 
         while (1) {
             cout << "Dificultad:  [d]: dificil | [m]: medio | [f]: facil | [i]: imposible: | [s]: salir  " << endl;
             cin >> dificultad;
             if (dificultad == "d") {
-                maxDepth = 9;
+                profMaxima = 9;
                 break;
             } else if (dificultad == "m") {
-                maxDepth = 5;
+                profMaxima = 5;
                 break;
             } else if (dificultad == "f") {
-                maxDepth = 3;
+                profMaxima = 3;
                 break;
             } else if (dificultad == "i") {
-                maxDepth = 11; //Mientras mas mas dificil, pero toma mas tiempo en cargar cada jugada de la IA
+                profMaxima = 11; //Mientras mas mas dificil, pero toma mas tiempo en cargar cada jugada de la IA
                 break;
             } else if (dificultad == "s") {
                 cout << "Gracias por jugar... " << endl;
@@ -58,7 +58,7 @@ int main() {
             }
 
             cout << "IA: "<<endl;
-            AI::NewMove compMove = ai.minimax(board, true, maxDepth, COMP, ALPHA, BETA);
+            AI::NewMove compMove = ai.minimax(board, true, profMaxima, COMP, ALPHA, BETA);
             board.dejarDisco(compMove.move, COMP);
 
             if (board.puntajeTablero() == COMP_WIN){
