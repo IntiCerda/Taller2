@@ -3,8 +3,6 @@
 #include <iostream>
 using namespace std;
 
-
-
 int main() {
     string respuesta;
     do {
@@ -27,7 +25,7 @@ int main() {
                 maxDepth = 3;
                 break;
             } else if (dificultad == "i") {
-                maxDepth = 11; //Mientras mas mas dificil, pero toma mas tiempo por las ramificaciones
+                maxDepth = 11; //Mientras mas mas dificil, pero toma mas tiempo en cargar cada jugada de la IA
                 break;
             } else if (dificultad == "s") {
                 cout << "Gracias por jugar... " << endl;
