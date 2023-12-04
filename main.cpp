@@ -41,7 +41,7 @@ int main() {
         Board board;
         AI ai;
         cout << "\nConnecta 4\n" << endl;
-        cout << "El programa contiene un autoguardado despues de cada movimiento del Jugador. " <<endl;
+        cout << "El programa contiene un autoguardado despues de cada movimiento del Jugador, o eso deberia de hacer pero no funciona... " <<endl;
         int profMaxima; // profundidad 
         string dificultad;
 

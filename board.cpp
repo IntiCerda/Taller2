@@ -142,9 +142,9 @@ void Board::imprimirTablero(){
     cout << "\n\n";
 }
 
-//guarda la partida en un csv.
+//guarda la partida en un csv. NO FUNCIONA
 void Board:: guardarPartida(std::string nombreArchivo) {
-    std::ofstream archivo(nombreArchivo);
+    std::ofstream archivo(nombreArchivo, std::ofstream::out | std::ofstream::trunc); 
     if (archivo.is_open()) {
         for (int y = 0; y < 6; y++) {
             for (int x = 0; x < 7; x++) {
@@ -159,7 +159,7 @@ void Board:: guardarPartida(std::string nombreArchivo) {
     } 
 }
 
-//Carga la partida sdkla
+//Carga la partida, NO FUNCIONA
 void Board:: cargarPartida(std::string nombreArchivo) {
     std::ifstream archivo(nombreArchivo);
     if (archivo.is_open()) {
