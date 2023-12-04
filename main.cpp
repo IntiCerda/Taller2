@@ -1,7 +1,38 @@
 #include "board.h"
 #include "ai.h"
 #include <iostream>
+#include <fstream>  
 using namespace std;
+
+void guardar_ganador(const std::string& ganador) {
+    std::ofstream archivo("partidas.csv", std::ios::app);
+    archivo << ganador << endl;
+    archivo.close();
+}
+
+//Imprime el archivo CSV, 
+void mostrar_historial() {
+    cout<<endl;
+    cout<<"Historial: "<<endl;
+    cout<<endl;
+    std::ifstream archivo("partidas.csv");
+    if (archivo.is_open()) {
+        std::string linea;
+        while (std::getline(archivo, linea)) {
+            cout <<"-> "<< linea << endl;
+        }
+        archivo.close();
+    } else {
+        cout << "No se pudo abrir el archivo." <<endl;
+    }
+}
+//Limpia el archivo.csv
+void limpiar_archivo() {
+    std::ofstream archivo("partidas.csv", std::ofstream::out | std::ofstream::trunc); //Sincermaente ni idea de como funciona esto, es la forma que encontre para poder limpiar el .csv
+    cout<<"Archivo limpiado. "<<endl;
+    cout<<endl;
+    archivo.close();
+}
 
 int main() {
     string respuesta;
@@ -13,10 +44,10 @@ int main() {
         string dificultad;
 
         while (1) {
-            cout << "Dificultad:  [d]: dificil | [m]: medio | [f]: facil | [i]: imposible: | [s]: salir  " << endl;
+            cout << "Dificultad:  [d]: dificil | [m]: medio | [f]: facil | [i]: imposible: | [h]: historial de victorias | [l] Limpiar Historial | [s]: salir  " << endl;
             cin >> dificultad;
             if (dificultad == "d") {
-                profMaxima = 9;
+                profMaxima = 7;
                 break;
             } else if (dificultad == "m") {
                 profMaxima = 5;
@@ -25,12 +56,19 @@ int main() {
                 profMaxima = 3;
                 break;
             } else if (dificultad == "i") {
-                profMaxima = 11; //Mientras mas mas dificil, pero toma mas tiempo en cargar cada jugada de la IA
+                profMaxima = 9; //Mientras mas mas dificil, pero toma mas tiempo en cargar cada jugada de la IA
                 break;
-            } else if (dificultad == "s") {
+            } else if(dificultad == "h"){
+                mostrar_historial();
+                
+            }else if(dificultad == "l"){
+                limpiar_archivo();
+
+            }else if (dificultad == "s") {
                 cout << "Gracias por jugar... " << endl;
                 return 0;  // Salir del programa
             }
+            
         }
 
         while (1) {
@@ -51,9 +89,9 @@ int main() {
             }
 
             board.imprimirTablero();
-
             if (board.puntajeTablero() == HUMAN_WIN){
                 cout << "Victoria! " << endl;
+                guardar_ganador("Jugador");
                 break;
             }
 
@@ -64,12 +102,12 @@ int main() {
             if (board.puntajeTablero() == COMP_WIN){
                 board.imprimirTablero();
                 cout << "IA Win..." << endl;
+                guardar_ganador("IA");
                 break;
             }
         }
 
-        // Verificar si el jugador desea volver a jugar
-        string respuesta = "";
+        // Verificar si el jugador desea volver a jugars
         while(respuesta != "s" && respuesta != "n"){
             cout << "Desea volver a jagur? [s/n]: ";
             cin >> respuesta;
