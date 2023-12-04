@@ -1,6 +1,7 @@
 #pragma once
 #define BOARD_H
-
+#include <fstream>
+#include <string>
 #include <iostream>
 #include "define.h"
 
@@ -15,4 +16,6 @@ public:
     long puntajeTablero();
     int dejarDisco(int columna, int player);
     void eliminarDisco(int fila, int columna);
+    void guardarPartida(std::string nombreArchivo);
+    void cargarPartida(std::string nombreArchivo);
 };

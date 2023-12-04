@@ -1,4 +1,7 @@
 #include "board.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 
 //inicializa el tablero con celdas vacías y se llama automáticamente cuando se crea un objeto de la clase "Board"
@@ -137,4 +140,41 @@ void Board::imprimirTablero(){
         cout << " " << x;
     }
     cout << "\n\n";
+}
+
+//guarda la partida en un csv.
+void Board:: guardarPartida(std::string nombreArchivo) {
+    std::ofstream archivo(nombreArchivo);
+    if (archivo.is_open()) {
+        for (int y = 0; y < 6; y++) {
+            for (int x = 0; x < 7; x++) {
+                archivo << tablero[y][x];
+                if (x < 6) {
+                    archivo << ",";  // Separador de columnas
+                }
+            }
+            archivo << std::endl;  // Nueva fila
+        }
+        archivo.close();
+    } 
+}
+
+//Carga la partida sdkla
+void Board:: cargarPartida(std::string nombreArchivo) {
+    std::ifstream archivo(nombreArchivo);
+    if (archivo.is_open()) {
+        for (int y = 0; y < 6; y++) {
+            for (int x = 0; x < 7; x++) {
+                char valor;
+                archivo >> valor;
+                tablero[y][x] = valor - '0';
+                archivo.ignore(); 
+            }
+        }
+        archivo.close();
+        cout << "Partida cargada "<< endl;
+    } else {
+        cout << "Error al cargar partida... " << endl;
+    }
+    archivo.close();
 }

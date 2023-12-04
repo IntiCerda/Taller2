@@ -4,6 +4,7 @@
 #include <fstream>  
 using namespace std;
 
+//Funcion que agrega el ganador al archivo .csv
 void guardar_ganador(const std::string& ganador) {
     std::ofstream archivo("partidas.csv", std::ios::app);
     archivo << ganador << endl;
@@ -40,11 +41,13 @@ int main() {
         Board board;
         AI ai;
         cout << "\nConnecta 4\n" << endl;
+        cout << "El programa contiene un autoguardado despues de cada movimiento del Jugador. " <<endl;
         int profMaxima; // profundidad 
         string dificultad;
 
         while (1) {
-            cout << "Dificultad:  [d]: dificil | [m]: medio | [f]: facil | [i]: imposible: | [h]: historial de victorias | [l] Limpiar Historial | [s]: salir  " << endl;
+            cout << "Dificultad:  [d]: dificil                | [m]: medio            | [f]: facil         | [i]: imposible   " << endl;
+            cout << "Extras:      [h]: historial de victorias | [l] Limpiar Historial | [c] Cargar partida | [s]: salir" << endl;
             cin >> dificultad;
             if (dificultad == "d") {
                 profMaxima = 7;
@@ -64,6 +67,9 @@ int main() {
             }else if(dificultad == "l"){
                 limpiar_archivo();
 
+            }else if (dificultad == "c") {
+                board.cargarPartida("partidaGuardada");
+                break;
             }else if (dificultad == "s") {
                 cout << "Gracias por jugar... " << endl;
                 return 0;  // Salir del programa
@@ -87,6 +93,7 @@ int main() {
                 cout << "Invalido columna llena... Ingresa movimiento: "<<endl;
                 cin >> movimiento;
             }
+            board.guardarPartida("partidaGuardada");
 
             board.imprimirTablero();
             if (board.puntajeTablero() == HUMAN_WIN){
